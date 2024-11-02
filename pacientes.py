@@ -9,15 +9,15 @@ class Pacientes:
         self.medicamento= []
         self.id = Pacientes.contador_id
         
-    def agregar_dx (self, enfermedad):
+    def agregar_diagnostico (self, enfermedad):
         self.historial.append (enfermedad)
 
 
-    def agregar_med (self, medicamento):
-        self.medicamento.append (medicamento)
+    def modificar_edad (self, nueva_edad):
+        self.edad = nueva_edad 
+        print (f"edad de {self.nombre} ha sido modificada a {self.edad} años")
+    
+    def mostrar_informacion(self):
+        print(f"Paciente ID: {self.id}, Nombre: {self.nombre}, Edad: {self.edad}")
 
 
-    
-    
-
-    
