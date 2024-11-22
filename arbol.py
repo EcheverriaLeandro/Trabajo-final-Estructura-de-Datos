@@ -81,6 +81,11 @@ class ArbolAVLPacientes:
     def insersion(self, paciente):
         self.raiz = self.__insertar_nodo(self.raiz, paciente)
         
+    def __buscar_minimo(self, nodo):
+        if nodo is None or nodo.izquierdo is None:
+            return nodo
+        return self.__buscar_minimo(nodo)
+        
     def buscar (self, id_paciente): 
         return self.__buscar_paciente(self.raiz, id_paciente)
     
