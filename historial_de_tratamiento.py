@@ -1,12 +1,10 @@
-class Nodo_historial_tratamiento():
-      
+class Nodo_historial_tratamiento():    
   def __init__(self,enfermedad,medicamento):
     self.enfermedad = enfermedad
     self.medicamento = medicamento
     self.siguiente = None
       
 class Lista_historial_tratamiento():
-  
   def __init__(self):
     self.head = None
     

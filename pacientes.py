@@ -4,7 +4,7 @@ class Pacientes:
     contador_id = 0
     
     def __init__ (self, nombre, edad):
-        Pacientes.contador_id =+1
+        Pacientes.contador_id +=1
         self.nombre = nombre
         self.edad = edad
         self.historial= []
