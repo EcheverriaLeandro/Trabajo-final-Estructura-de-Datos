@@ -4,7 +4,7 @@ from pacientes import Pacientes
 class NodoPaciente: 
     def __init__ (self, paciente): 
         self.paciente = paciente
-        self.izquierdo = None
+        self.izquierdo = None 
         self.derecho = None
         self.altura = 1
 
@@ -16,48 +16,73 @@ class ArbolAVLPacientes:
         if self.raiz is None:
             return True
     
-    def obtener_altura(self, nodo):
+    def __obtener_altura(self, nodo):
         if not nodo:
             return 0
         return nodo.altura
     
-    def obtener_balance(self, nodo):
+    def __obtener_balance(self, nodo):
         if not nodo:
             return 0
-        return self.obtener_altura(nodo.derecho) - self.obtener_altura(nodo.izquierdo)
+        return self.__obtener_altura(nodo.derecho) - self.__obtener_altura(nodo.izquierdo)
     
-    def rotar_derecha(self, nodo):
+    def __rotar_derecha(self, nodo):
         nueva_raiz = nodo.izquierdo
         arbol_derecho_auxiliar = nueva_raiz.derecho
         nueva_raiz.derecho = nodo
         nodo.izquierdo = arbol_derecho_auxiliar
         
-        nodo.altura = 1 + max(self.obtener_altura(nodo.izquierdo), self.obtener_altura(nodo.derecho))
-        nueva_raiz.altura = 1 + max(self.obtener_altura(nueva_raiz.izquierdo), self.obtener_altura(nueva_raiz.derecho))
+        nodo.altura = 1 + max(self.__obtener_altura(nodo.izquierdo), self.__obtener_altura(nodo.derecho))
+        nueva_raiz.altura = 1 + max(self.__obtener_altura(nueva_raiz.izquierdo), self.__obtener_altura(nueva_raiz.derecho))
         
         return nueva_raiz
     
-    # def insertar (self, paciente):  #metodo publico
-    #     nuevo_nodo = NodoPaciente (paciente) 
-    #     if self.arbol_vacio == True:
-    #         self.raiz = nuevo_nodo
-    #     else: 
-    #         self.__insertar_nodo (self.raiz, nuevo_nodo) 
-
-    # def __insertar_nodo (self, nodo_actual, nuevo_nodo): #Metodo privado
-    #     if nuevo_nodo.paciente.id < nodo_actual.paciente.id:
-    #         if nodo_actual.izquierdo is None: 
-    #             nodo_actual.izquiedo = nuevo_nodo
-    #         else: 
-    #             self.__insertar_nodo (nodo_actual.izquierdo, nuevo_nodo) 
-    #     else:
-    #         if nodo_actual.derecho is None: 
-    #             nodo_actual.derecho = nuevo_nodo
-    #         else: 
-    #             self.__insertar_nodo (nodo_actual.derecho, nuevo_nodo)
-
+    def __rotar_izquierda(self, nodo):
+        nueva_raiz = nodo.derecho
+        arbol_izquierdo_auxiliar = nueva_raiz.izquierdo
+        nueva_raiz.izquierdo = nodo
+        nodo.derecha = arbol_izquierdo_auxiliar
+        
+        nodo.altura = 1 + max(self.__obtener_altura(nodo.izquierdo), self.__obtener_altura(nodo.derecho))
+        nueva_raiz.altura = 1 + max(self.__obtener_altura(nueva_raiz.izquierdo), self.__obtener_altura(nueva_raiz.derecho))
+        
+        return nueva_raiz
+    
+    def __insertar_nodo (self, raiz, nuevo_nodo): #Metodo privado
+        if not raiz:
+            return NodoPaciente(nuevo_nodo)
+        
+        if nuevo_nodo.id < raiz.paciente.id:
+            raiz.izquierdo = self.__insertar_nodo(raiz.izquierdo, nuevo_nodo)
+        else:
+            raiz.derecho = self.__insertar_nodo(raiz.derecho, nuevo_nodo)
+        
+        raiz.altura = 1 + max(self.__obtener_altura(raiz.izquierdo), self.__obtener_altura(raiz.derecho))
+        
+        balance = self.__obtener_balance(raiz)
+        
+        #rotacion a la derecha
+        if balance > 1 and nuevo_nodo.id < raiz.izquierdo.id:
+            return self.__rotar_derecha(raiz)
+        #rotacion a la izquierda
+        if balance < -1 and nuevo_nodo.id > raiz.izquierdo.id:
+            return self.__rotar_izquierda(raiz)
+        #rotacion izquierda derecha
+        if balance > 1 and nuevo_nodo.id > raiz.izquierdo.id:
+            raiz.izquierdo = self.__rotar_izquierda(raiz.izquierdo)
+            return self.__rotar_derecha(raiz)
+        #rotacion derecha izquierda
+        if balance < -1 and nuevo_nodo.id < raiz.derecho.id:
+            raiz.derecho = self.__rotar_derecha(raiz.derecho)
+            return self.__rotar_izquierda(raiz)
+    
+        return raiz
+    
+    def insersion(self, paciente):
+        self.raiz = self.__insertar_nodo(self.raiz, paciente)
+        
     def buscar (self, id_paciente): 
-        return self.__buscar_paciente (self.raiz, id_paciente)
+        return self.__buscar_paciente(self.raiz, id_paciente)
     
     def __buscar_paciente (self, nodo_actual, id_paciente):
         if nodo_actual is None: 
