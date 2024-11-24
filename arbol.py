@@ -1,6 +1,6 @@
 from pacientes import Pacientes
 
-
+#definicion del nodo para el arbolAVL
 class NodoPaciente: 
     def __init__ (self, paciente): 
         self.paciente = paciente
@@ -11,24 +11,21 @@ class NodoPaciente:
 class ArbolAVLPacientes: 
     def __init__ (self):
         self.raiz = None
-
-    def arbol_vacio(self):
-        if self.raiz is None:
-            return True
     
-    def __obtener_altura(self, nodo):
+    def __obtener_altura(self, nodo): #metodo necesario para obtener la altura de nuestros nodos
         if not nodo:
             return 0
         return nodo.altura
     
-    def __obtener_balance(self, nodo):
+    def __obtener_balance(self, nodo): #metodo necesario para luego comparar el desbalance o no de nuestros nodos
         if not nodo:
             return 0
         return self.__obtener_altura(nodo.derecho) - self.__obtener_altura(nodo.izquierdo)
     
-    def __rotar_derecha(self, nodo):
+    def __rotar_derecha(self, nodo): #metodo para hacer que el hijo izquierdo sea la nueva raiz y reajusta la altura de los nodos
         nueva_raiz = nodo.izquierdo
         arbol_derecho_auxiliar = nueva_raiz.derecho
+        
         nueva_raiz.derecho = nodo
         nodo.izquierdo = arbol_derecho_auxiliar
         
@@ -37,9 +34,10 @@ class ArbolAVLPacientes:
         
         return nueva_raiz
     
-    def __rotar_izquierda(self, nodo):
+    def __rotar_izquierda(self, nodo): #metodo para hacer que el hijo derecho sea la nueva raiz y reajusta la altura de los nodos
         nueva_raiz = nodo.derecho
         arbol_izquierdo_auxiliar = nueva_raiz.izquierdo
+        
         nueva_raiz.izquierdo = nodo
         nodo.derecha = arbol_izquierdo_auxiliar
         
@@ -78,7 +76,7 @@ class ArbolAVLPacientes:
     
         return raiz
     
-    def insersion(self, paciente):
+    def insersion(self, paciente): #metodo publico de insersion 
         self.raiz = self.__insertar_nodo(self.raiz, paciente)
         
     def __buscar_minimo(self, nodo):
