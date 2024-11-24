@@ -1,9 +1,9 @@
 import historial_de_tratamiento
-
+#declaracion de la clase principal para nuestro programa
 class Pacientes:
-    contador_id = 0
+    contador_id = 0 #contador declarado para auto asignar id a los pacientes
     
-    def __init__ (self, nombre, edad):
+    def __init__ (self, nombre, edad): 
         Pacientes.contador_id +=1
         self.nombre = nombre
         self.edad = edad
@@ -12,12 +12,12 @@ class Pacientes:
         self.id = Pacientes.contador_id
         
     def __agregar_diagnostico (self, enfermedad):
-        self.historial.append (enfermedad)
+        self.historial.append(enfermedad)
 
     def __agregar_medicamento (self, medicamento):
         self.medicamento.append(medicamento)
         
-    def agregar_tratamiento(self, enfermedad, medicamento):
+    def agregar_tratamiento(self, enfermedad, medicamento): #declaramos este metodo de tal forma que alimente las listas de la clase paciente asi como el historial de tratamiento
         historial_de_tratamiento.Lista_historial_tratamiento.nuevo_tratamiento(enfermedad,medicamento)
         Pacientes.__agregar_medicamento(medicamento)
         Pacientes.__agregar_diagnostico(enfermedad)

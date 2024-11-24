@@ -2,7 +2,7 @@ import pacientes
 
 class Maxheap():
     def __init__(self):
-        heap = []
+        self.heap = []
     
     def __intercambio(self, i, j):
         self.heap[i], self.heap[j] = self.heap[j], self.heap[i]

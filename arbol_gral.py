@@ -26,3 +26,30 @@ class ArbolGeneral:
         nodo_hermano = NodoGeneral(evento_hermano)
         nodo.agregar_hermano(nodo_hermano)
         return nodo_hermano
+
+    def imprimir_arbol_con_hermanos(self, nodo, nivel=0):
+        #imprime el nodo considerando hijos y hermanos 
+        while nodo:
+            print("  " * nivel + f"- {nodo.evento}")
+            for hijo in nodo.hijos:
+                self.imprimir_arbol_con_hermanos(hijo, nivel + 1)
+            nodo = nodo.hermano
+    
+
+
+# Construccion del arbol con hijos y hermanos
+arbol = ArbolGeneral("evento_medico")  #raiz
+
+# nivel 1 
+consulta_1 = arbol.agregar_hijo(arbol.raiz, "Primer consulta")
+consulta_2 = arbol.agregar_hermano(consulta_1, "Segunda consulta")
+
+# nivel 2 hijos y hermanos para consulta 2 
+diagnostico_1 = arbol.agregar_hijo(consulta_1, "Primer diagnostico")
+tratamiento_1 = arbol.agregar_hermano(diagnostico_1, "Primer tratamiento")
+
+# nivel 2 hijos y hnos para consulta 2 
+diagnostico_2 = arbol.agregar_hijo(consulta_2, "Segundo diagnostico")
+tratamiento_2 = arbol.agregar_hermano(diagnostico_2, "Segundo tratamiento")
+
+arbol.imprimir_arbol_con_hermanos(arbol.raiz)
