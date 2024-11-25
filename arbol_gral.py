@@ -1,3 +1,5 @@
+from pacientes import Pacientes
+
 class NodoGeneral:
     def __init__(self, evento):
         self.evento = evento      # InformaciÃ³n del nodo
@@ -35,10 +37,10 @@ class ArbolGeneral:
                 self.imprimir_arbol_con_hermanos(hijo, nivel + 1)
             nodo = nodo.hermano
     
-
+paciente1 = Pacientes("Juan Pérez", 65)
 
 # Construccion del arbol con hijos y hermanos
-arbol = ArbolGeneral("evento_medico")  #raiz
+arbol = ArbolGeneral(paciente1)  #raiz
 
 # nivel 1 
 consulta_1 = arbol.agregar_hijo(arbol.raiz, "Primer consulta")

@@ -1,4 +1,5 @@
-import pacientes
+from pacientes import Pacientes
+
 
 class Maxheap():
     def __init__(self):
@@ -40,3 +41,44 @@ class Maxheap():
             self.heap[0] = self.heap.pop()
             self.__burbujeo_abajo(0)
             return raiz
+        
+    def mostrar_cola(self):
+    
+        print("Pacientes en la cola (prioridad descendente):")
+        for i in self.heap:
+            print(f"paciente :{i[1]} (Prioridad: {i[0]})")
+         
+# Crear una instancia de Maxheap
+cola = Maxheap()
+
+# Crear pacientes
+paciente1 = Pacientes("Juan Pérez", 65)
+paciente2 = Pacientes("María López", 70)
+paciente3 = Pacientes("Carlos Ruiz", 50)
+
+# Asignar prioridades (gravedad)
+prioridad1 = 5  # Gravedad de Juan
+prioridad2 = 8  # Gravedad de María
+prioridad3 = 3  # Gravedad de Carlos
+
+# Insertar pacientes en la cola
+cola.insertar(3, paciente1)
+cola.insertar(1, paciente2)
+cola.insertar(3, paciente3)
+
+# Mostrar la cola
+cola.mostrar_cola()
+
+# Atender pacientes según prioridad
+print("\nAtendiendo pacientes:")
+atendido = cola.extraer_maximo()
+print(f"Atendido: {atendido[1]} (Prioridad: {atendido[0]})")
+
+atendido = cola.extraer_maximo()
+print(f"Atendido: {atendido[1]} (Prioridad: {atendido[0]})")
+
+atendido = cola.extraer_maximo()
+print(f"Atendido: {atendido[1]} (Prioridad: {atendido[0]})")
+
+# Intentar atender a más pacientes
+atendido = cola.extraer_maximo()
