@@ -4,7 +4,7 @@ from pacientes import Pacientes
 class NodoPaciente: 
     def __init__ (self, paciente): 
         self.paciente = paciente
-        self.izquierdo = None 
+        self.izquierdo = None
         self.derecho = None
         self.altura = 1
 
