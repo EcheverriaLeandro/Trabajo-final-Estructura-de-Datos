@@ -82,6 +82,31 @@ ________________________________________________________________________________
     def insersion(self, paciente): #metodo publico de insersion 
         self.raiz = self.__insertar_nodo(self.raiz, paciente)  ---> por lo tanto como el caso de mayor complejidad temporal es O(log n) este es el orden al que pertenece el metodo de insersion de nuestro arbol
     
-
+________________________
         
+    para poder analizar la eficiencia en terminos de tiempo y espacio del algoritmo que realizamos para la busqueda en cola de prioridad, primero debemos establecer que nosotros hemos tomado la decision de utilizar una estructura tipo Max Heap para poder ordenar los pacientes que requieren una atencion de mayor urgencia. por lo tanto no era necesario realizar de por si una busqueda debido a que la misma estructura ordena de forma ascendente los datos ingresados y eso lo realizamos extrayendo el primer dato del monticulo. Para ello utilizamos el siguiente modulo: 
+    def extraer_maximo(self):
+        if len(self.heap) == 0:
+            return None
+        elif len(self.heap) == 1:
+            return self.heap.pop()
+        else:
+            raiz = self.heap[0]
+            self.heap[0] = self.heap.pop()
+            self.__burbujeo_abajo(0)
+            return raiz
+que a su vez este codigo utiliza la funcion burbuejo abajo 
+
+def __burbujeo_abajo(self, index):
+        izquierdo = 2*index+1
+        derecho = 2*index+2
+        mayor = index
+        
+        if izquierdo < len(self.heap) and self.heap[izquierdo][0] > self.heap[mayor][0]:
+            mayor = izquierdo
+        if derecho < len(self.heap) and self.heap[derecho][0] > self.heap[mayor][0]:
+            mayor = derecho
+        if mayor != index:
+            self.__intercambio(index, mayor)
+            self.__burbujeo_abajo(mayor)
 _________________________________________________________________________________________________________________________________________________________________________________________________________________
