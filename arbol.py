@@ -129,6 +129,9 @@ class ArbolAVLPacientes:
             return self.__rotar_izquierda(raiz)
         
         return raiz
+    
+    def eliminacion(self, id): #metodo publico de eliminacion
+        self.raiz = self.__insertar_nodo(self.raiz, id)
         
     def buscar (self, id_paciente): 
         return self.__buscar_paciente(self.raiz, id_paciente)
