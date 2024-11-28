@@ -16,7 +16,7 @@ class ListaAdyacenciasPonderado:
         for vertice in self.lista_adyacencia:
             print(f"{vertice}: {self.lista_adyacencia[vertice]}")
             
-    def buscar_camino_minimo(self, hospitalpartida, hospitalllegada): #se busca mediante dfs y el algoritmo de dijkstra el camino minimo para el traslado de un pasiente de un hospital a otro
+    def __buscar_camino_minimo(self, hospitalpartida, hospitalllegada): #se busca mediante dfs y el algoritmo de dijkstra el camino minimo para el traslado de un pasiente de un hospital a otro
         distancias =  {nodo: float('inf') for nodo in self.lista_adyacencia}
         distancias[hospitalpartida] = 0
         cola_prioridad = [(0,hospitalpartida)]
@@ -38,6 +38,5 @@ class ListaAdyacenciasPonderado:
         return float('inf'), []
     
     def mostrar_camino_minimo(self, hospitalpartida, hospitalllegada):
-        distancia, ruta = self.buscar_camino_minimo(hospitalpartida, hospitalllegada)
-        
+        distancia, ruta = self.__buscar_camino_minimo(hospitalpartida, hospitalllegada)
         print (f"La distancia mínima es {distancia} y el camino es {ruta}")
